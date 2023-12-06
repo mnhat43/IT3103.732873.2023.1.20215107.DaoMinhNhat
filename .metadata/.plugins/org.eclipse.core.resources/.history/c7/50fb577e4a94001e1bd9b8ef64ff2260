@@ -1,0 +1,38 @@
+package hust.soict.dsai.aims.media;
+
+import java.util.List;
+import java.util.ArrayList;
+
+public class Book {
+	private int id;
+	private String title;
+	private String category;
+	private float cost;
+	private List<String> author = new ArrayList<String>();
+
+	public Book() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public void addAuthor(String authorName) {
+		int count = 0;
+		for (String name : author) {
+			if (name.equals(authorName)) {
+				count+=1;
+				break;
+			}
+		}
+		if (count==0) {
+			author.add(authorName);
+		}
+	}
+	public void removeAuthor(String authorName) {
+		for (String name : author) {
+			if (name.equals(authorName)) {
+				author.remove(authorName);
+				break;
+			}
+		}
+	}
+}
