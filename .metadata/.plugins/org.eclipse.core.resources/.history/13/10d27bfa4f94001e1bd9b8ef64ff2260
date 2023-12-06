@@ -1,0 +1,84 @@
+package hust.soict.dsai.aims.cart;
+
+import java.util.ArrayList;
+
+import hust.soict.dsai.aims.media.Media;
+
+public class Cart {
+	public static final int MAX_NUMBERS_ORDER =20;
+	private	ArrayList<Media> itemsOrdered = new ArrayList<Media>() ;
+	private int qtyOrdered=0;
+
+	public void addMedia(Media media) {
+		if (qtyOrdered < 20)
+			itemsOrdered.add(media);
+			qtyOrdered+=1;
+		}
+	
+	public void addMedia(Media... args) {
+		for (Media media : args) {
+			if (qtyOrdered < 20) {
+				itemsOrdered.add(media);
+				qtyOrdered+=1;
+			}else {
+				break;
+			}
+		}
+	}
+	
+	public void removeMedia(Media media) {
+		if (itemsOrdered.contains(media)) {
+				itemsOrdered.remove(media);
+				qtyOrdered-=1;
+			}
+	}
+	
+	public float totalCost() {
+		float cost=0;
+		for (Media media : itemsOrdered) {
+			cost+=media.getCost();
+		}
+		return cost;
+	}
+	
+    // -----------------------------------------------------------------------
+    // In danh sách các mặt hàng đã đặt hàng của giỏ hàng, giá của từng mặt hàng và tổng giá
+    public void print() {
+  		System.out.println("*************************CART*************************");
+  		System.out.println("Ordered Items: ");
+  		for (int i=0;i<qtyOrdered;i++) {
+  			System.out.println(itemsOrdered[i].toString());
+  		}
+  		System.out.println("Total cost: " + this.totalCost());
+  		System.out.println("******************************************************");
+  	}
+    
+    // -----------------------------------------------------------------------
+    //Search for DVDs in the cart by ID and display the search results
+    public void  searchByID(int id) {
+    	for(int i = 0; i < qtyOrdered; i++) {
+    		if(itemsOrdered[i].getId() == id) {
+    			System.out.println("Result for id: " + id);
+    			System.out.println(itemsOrdered[i].toString());
+    			return;
+    		}
+    	}
+    	System.out.println("No match is found !!!");
+    }
+    
+    // -----------------------------------------------------------------------
+    //Search for DVDs in the cart by title and print the results
+    public void  searchByTitle(String title) {
+    	for(int i = 0; i < qtyOrdered; i++) {
+    		if(itemsOrdered[i].getTitle().equals(title)) {
+    			System.out.println("Result for title: " + title);
+    			System.out.println(itemsOrdered[i].toString());
+    			return;
+    		}
+    	}
+    	System.out.println("No match is found !!!");
+    }
+    
+}
+
+
