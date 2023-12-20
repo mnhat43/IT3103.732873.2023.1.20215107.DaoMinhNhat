@@ -14,4 +14,9 @@ public class Disc extends Media{
 		this.length=length;
 		this.director=director;
 	}
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

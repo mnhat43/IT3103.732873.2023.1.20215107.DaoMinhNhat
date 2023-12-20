@@ -3,25 +3,32 @@ package hust.soict.dsai.aims;
 import java.util.Collections;
 import java.util.Scanner;
 
+import javax.naming.LimitExceededException;
+
 import hust.soict.dsai.aims.cart.Cart;
+import hust.soict.dsai.aims.exception.PlayerException;
 import hust.soict.dsai.aims.media.*;
 import hust.soict.dsai.aims.store.Store;
 
 public class Aims {
-
 	static Scanner input = new Scanner(System.in);
-	static Store store = new Store();
 	static Cart cart = new Cart();
-	
+	static Store store = new Store();
 	public static void main(String[] args) {
-		
-		DigitalVideoDisc dvd1 = new DigitalVideoDisc("The Lion King", "Animation", "Roger Allers", 87, 19.95f);		
-		DigitalVideoDisc dvd2 = new DigitalVideoDisc("Star Wars", "Science Fiction", "George Lucas", 87, 24.95f);		
-		DigitalVideoDisc dvd3 = new DigitalVideoDisc("Aladin", "Animation", "", 90, 18.99f);
 
+		
+		DigitalVideoDisc dvd1= new DigitalVideoDisc("The Lion King", "Animation", "Roger Allers", 87, 19.95f);
+//		cart.addMedia(dvd1);
+		
+		DigitalVideoDisc dvd2= new DigitalVideoDisc("Star Wars", "Science Fiction", "George Lucas", 87, 24.95f);
+//		cart.addMedia(dvd2);
+		
+		DigitalVideoDisc dvd3= new DigitalVideoDisc("Aladin", "Animation","VanHuu",94, 18.99f);
+//		cart.addMedia(dvd3);
+		
 		CompactDisc cd1 = new CompactDisc("99%", "Music", "MCK", "MCK", 65, 3.5f);
 		Book book1 = new Book("Harry Potter", "Magic", 29.99f);
-
+//		
 		store.addMedia(dvd3);
 		store.addMedia(dvd1);
 		store.addMedia(dvd2);
@@ -29,6 +36,8 @@ public class Aims {
 		store.addMedia(cd1);
 
 		showMenu();
+//		
+
 	}
 	public static void showMenu() {
 		System.out.println("AIMS: ");
@@ -55,7 +64,7 @@ public class Aims {
 		case "0":
 			break;
 		}
-	}
+}
 	public static void storeMenu() {
 		System.out.println("Options: ");
 		System.out.println("--------------------------------");
@@ -96,7 +105,11 @@ public class Aims {
 			if (found3!=null) {
 				if (found3 instanceof Playable) {
 					Playable f = (Playable) found3;
-					f.play();
+					try {
+						f.play();
+					} catch (PlayerException e) {
+						e.printStackTrace();
+					}
 				}else {
 					System.out.println("Can not play this kind of media!");
 				}
@@ -112,7 +125,9 @@ public class Aims {
 			showMenu();
 			break;
 		}
-	}
+		
+
+}
 	public static void mediaDetailsMenu() {
 		System.out.println("Options: ");
 		System.out.println("--------------------------------");
@@ -134,7 +149,12 @@ public class Aims {
 		case "2":
 			if (media instanceof Playable) {
 				Playable f = (Playable) media;
-				f.play();
+				try {
+					f.play();
+				} catch (PlayerException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}else {
 				System.out.println("Can not play this kind of media!");
 			}
@@ -184,7 +204,12 @@ public class Aims {
 			if (found3!=null) {
 				if (found3 instanceof Playable) {
 					Playable f = (Playable) found3;
-					f.play();
+					try {
+						f.play();
+					} catch (PlayerException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 				}else {
 					System.out.println("Can not play this kind of media!");
 				}
@@ -355,5 +380,4 @@ public class Aims {
 			break;
 		}
 	}
-
 }
